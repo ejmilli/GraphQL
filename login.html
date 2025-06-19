@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css">
     <title>Morty Portal</title>
 </head>
-<body>
-    <form action="">
-        <h1> Rick Portal</h1>
-        <label for="login">Email/Username</label>
-         <input type="text"  name="login" id="login-name-text" placeholder="Email/Username" required>
+<body class="login-page">
+ <form action="">
+  <h1>Enter the Multiverse</h1>
+  <label for="login">Email/Username</label>
+  <input type="text" name="login" id="login-name-text" placeholder="Email/Username" required>
 
+  <label for="password">Password</label>
+  <input type="password" name="password" id="login-password-text" placeholder="Enter password" required>
 
-         <label for="password">Password</label>
-         <input type="password" name="password" id="login-password-text" placeholder="Enter password" required >
+  <button type="submit">WUBBA LUBBA DUB DUB 🔓</button>
+  
+ 
+  <div id="error" style="color: #ff5555; margin-top: 10px; text-align: center;"></div>
 
-        
-         <button type="submit">Wooooooooo</button>
+  <small style="text-align:center; color:#aaa;">"Sometimes science is more art than science, Morty."</small>
+</form>
 
-    </form>
 </body>
+
+<script src="profile.js"></script>
 </html>
