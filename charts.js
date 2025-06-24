@@ -1,5 +1,5 @@
 import { formatDate, getRange, capitalizeFirstLetter } from './utils.js';
-import { addLine, addText, addCircle, addPath, addRect } from './svg-helpers.js';
+import { addLine, addText, addCircle, addPath, addRect } from './svg-helper.js';
 
 export function drawXPOverTimeGraph(xpData) {
     const XP_SVG = document.getElementById('xp-graph');
