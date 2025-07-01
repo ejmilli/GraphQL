@@ -45,7 +45,7 @@ export async function login(identifier, password) {
 
 export function logout() {
     sessionStorage.removeItem('jwt');
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 export function isAuthenticated() {

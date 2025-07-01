@@ -80,20 +80,6 @@ const QUERIES = {
           amount
           createdAt
       }
-    }`,
-
-    USER_SKILLS: `{
-      skills: transaction(
-          order_by: [{ type: desc }, { amount: desc }]
-          distinct_on: [type]
-          where: { type: { _like: "skill_%" } }
-      ) {
-          objectId
-          eventId
-          type
-          amount
-          createdAt
-      }
     }`
 };
 

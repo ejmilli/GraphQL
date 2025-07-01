@@ -1,8 +1,8 @@
 import { requireAuth, logout } from './auth.js';
 import { QUERIES } from './config.js';
-import { fetchUserData, fetchProjectData, fetchSkillsData } from './api.js';
+import { fetchUserData, fetchProjectData } from './api.js';
 import { insertData } from './utils.js';
-import { drawXPOverTimeGraph, drawXpTable, drawAuditRatioGraph, drawSkillsDistributionGraph } from './charts.js';
+import { drawXPOverTimeGraph, drawXpTable, drawAuditRatioGraph } from './charts.js';
 
 // Global state
 let userData = null;
@@ -47,24 +47,17 @@ async function renderProfile() {
         const eventId = wip.length > 0 ? wip[0].eventId : 0;
         console.log('Using eventId:', eventId);
 
-        // Fetch project and skills data
-        const [projectResult, skillsResult] = await Promise.all([
-            fetchProjectData(QUERIES.USER_PROJECT(eventId)),
-            fetchSkillsData(QUERIES.USER_SKILLS)
-        ]);
+        // Fetch project data only (removed skills data fetch)
+        const projectResult = await fetchProjectData(QUERIES.USER_PROJECT(eventId));
 
         console.log('Project data:', projectResult);
-        console.log('Skills data:', skillsResult);
 
         const xpData = projectResult?.xp_view || [];
-        const audits = projectResult?.audits || [];
-        const skills = skillsResult?.skills || [];
 
-        // Render all charts and tables
+        // Render charts and tables (removed skills graph)
         drawXPOverTimeGraph(xpData);
         drawXpTable(xpData);
         drawAuditRatioGraph(userData);
-        drawSkillsDistributionGraph(skills);
 
         console.log('Profile rendered successfully!');
     } catch (err) {
