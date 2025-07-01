@@ -55,3 +55,16 @@ export async function fetchProjectData(query) {
         throw error;
     }
 }
+
+// Fetch skills data
+export async function fetchSkillsData(query) {
+    try {
+        console.log('Fetching skills data...');
+        const data = await fetchGraphQL(query);
+        console.log('Skills data response:', data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching skills data:', error);
+        throw error;
+    }
+}

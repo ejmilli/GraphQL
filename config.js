@@ -59,24 +59,20 @@ const QUERIES = {
           }
       }
 
-      xp_view: transaction(
-          order_by: [{ createdAt: desc }]
-          where: { type: { _like: "xp" }, eventId: {_eq: ${eventId}}}
-      ) {
-          objectId
-          path
-          amount
-          createdAt
-      }
+      
 
-      audits: transaction(
-          order_by: [{ createdAt: desc }]
-          where: { type: { _in: ["up", "down"] }, eventId: {_eq: ${eventId}}}
+      
+    }`,
+
+    USER_SKILLS: `{
+      skills: transaction(
+          order_by: [{ type: desc }, { amount: desc }]
+          distinct_on: [type]
+          where: { type: { _like: "skill_%" } }
       ) {
-          attrs
-          type
           objectId
-          path
+          eventId
+          type
           amount
           createdAt
       }

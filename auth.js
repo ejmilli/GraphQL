@@ -29,7 +29,7 @@ export async function login(identifier, password) {
 
     if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed');
+        throw new Error(errorData.message || 'Invalid credentials');
     }
 
     const result = await response.json().catch(() => response.text());
