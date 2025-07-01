@@ -19,18 +19,6 @@ body.login-page {
   overflow: hidden;
 }
 
-/* Portal Animation Background */
-body.login-page::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, transparent 20%, rgba(151, 206, 76, 0.1) 20.5%, rgba(151, 206, 76, 0.1) 80%, transparent 80.5%);
-  animation: portalSpin 20s linear infinite;
-  z-index: -1;
-}
 
 
 .login-page form {
