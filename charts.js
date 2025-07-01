@@ -1,71 +1,6 @@
 import { formatDate, getRange, capitalizeFirstLetter } from './utils.js';
 import { addLine, addText, addCircle, addPath, addRect } from './svg-helper.js';
 
-
-export function drawXpTable(xpData) {
-    const container = document.getElementById('xp-table');
-    if (!container) return;
-    
-    container.innerHTML = '';
-
-    const title = document.createElement('h3');
-    title.textContent = 'XP Transactions';
-    title.style.color = '#467109';
-    container.appendChild(title);
-
-    if (!xpData || xpData.length === 0) {
-        const p = document.createElement('p');
-        p.textContent = 'No XP data available.';
-        container.appendChild(p);
-        return;
-    }
-
-    xpData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-    const table = document.createElement('table');
-    table.classList.add('xp-table');
-
-    const thead = document.createElement('thead');
-    thead.innerHTML = `
-        <tr>
-            <th>Project</th>
-            <th>Date</th>
-            <th style="text-align:right;">XP</th>
-        </tr>`;
-    table.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
-
-    xpData.forEach(tx => {
-        const tr = document.createElement('tr');
-
-        const project = tx.path?.split('/').pop().replace(/[-_]/g, ' ') || '—';
-        const tdProj = document.createElement('td');
-        tdProj.textContent = project;
-        tr.appendChild(tdProj);
-
-        const tdDate = document.createElement('td');
-        const d = new Date(tx.createdAt);
-        tdDate.textContent = isNaN(d) ? 'Invalid date' : d.toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        tr.appendChild(tdDate);
-        
-        const tdXp = document.createElement('td');
-        tdXp.style.textAlign = 'right';
-        tdXp.textContent = (tx.amount / 1000).toFixed(2);
-        tr.appendChild(tdXp);
-        tbody.appendChild(tr);
-    });
-    
-    table.appendChild(tbody);
-    container.appendChild(table);
-}
-
 export function drawAuditRatioGraph(userData) {
     const svg = document.getElementById('auditSvg');
     if (!svg || !userData) return;
@@ -76,7 +11,7 @@ export function drawAuditRatioGraph(userData) {
     const maxValue = Math.max(totalUp + totalUpBonus, totalDown, 1);
 
     const width = svg.clientWidth || 1000;
-    const height = svg.clientHeight || 400;
+ 
     const margin = { top: 40, right: 100, bottom: 20, left: 60 };
     const chartW = width - margin.left - margin.right;
     const barH = 30;
@@ -98,9 +33,9 @@ export function drawAuditRatioGraph(userData) {
     addRect(margin.left, y2, downW, barH, '#006400', svg);
     addText(margin.left + 5, y2 + barH - 5, '#ffffff', '20px', totalDown, svg);
 
-    // Add ratio
+    // Add ratio - FIXED: Changed from 'black' to 'white'
     const ratio = (totalUp / totalDown).toFixed(3);
-    const ratioLabel = addText(width - 20, margin.top + barH / 2 + 5, 'black', '24px', ratio, svg);
+    const ratioLabel = addText(width - 20, margin.top + barH / 2 + 5, 'white', '24px', ratio, svg);
     ratioLabel.setAttribute('text-anchor', 'end');
     ratioLabel.setAttribute('font-weight', 'bold');
 }
@@ -185,3 +120,5 @@ export function drawSkillsDistributionGraph(skillsData) {
     path.setAttribute('stroke-width', '2');
     svg.appendChild(path);
 }
+
+e

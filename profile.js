@@ -1,11 +1,13 @@
 import { requireAuth, logout } from './auth.js';
 import { QUERIES } from './config.js';
 import { fetchUserData, fetchProjectData, fetchSkillsData } from './api.js';
-import { insertData } from './utils.js';
-import { drawXpTable, drawAuditRatioGraph, drawSkillsDistributionGraph } from './charts.js';
+import { insertData, formatDate } from './utils.js';
+import { drawAuditRatioGraph, drawSkillsDistributionGraph } from './charts.js';
 
 // Global state
 let userData = null;
+let projectData = null;
+let skillsData = null;
 
 // Initialize profile page
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,8 +42,10 @@ async function renderProfile() {
         const wip = userResult.wip || [];
         userData = user;
 
-        // Display user info
-        displayUserInfo(user);
+        // Display user info sections
+        displayBasicInfo(user);
+        displayPersonalInfo(user);
+        displayAcademicProgress(user);
 
         // Get event ID for project queries
         const eventId = wip.length > 0 ? wip[0].eventId : 0;
@@ -56,12 +60,16 @@ async function renderProfile() {
         console.log('Project data:', projectResult);
         console.log('Skills data:', skillsResult);
 
-        const audits = projectResult?.audits || [];
-        const skills = skillsResult?.skills || [];
+        projectData = projectResult;
+        skillsData = skillsResult?.skills || [];
 
-        // Render all charts and tables
+        // Display projects section
+        displayProjectsInfo(projectResult, wip);
+
+        // Render all charts
         drawAuditRatioGraph(userData);
-        drawSkillsDistributionGraph(skills);
+        drawSkillsDistributionGraph(skillsData);
+      
 
         console.log('Profile rendered successfully!');
     } catch (err) {
@@ -73,13 +81,25 @@ async function renderProfile() {
     }
 }
 
-function displayUserInfo(user) {
-    // Basic info
-    insertData('campus', `[${user.campus }]`);
+// Section 1: Basic Information
+function displayBasicInfo(user) {
     insertData('id', `${user.id}`);
     insertData('login', `${user.login}`);
-  
-    // User attributes
+    insertData('campus', `[${user.campus}]`);
+    
+    if (user.createdAt) {
+        const createdDate = new Date(user.createdAt);
+        insertData('createdAt', formatDate(createdDate));
+    }
+    
+    if (user.updatedAt) {
+        const updatedDate = new Date(user.updatedAt);
+        insertData('updatedAt', formatDate(updatedDate));
+    }
+}
+
+// Section 2: Personal Information  
+function displayPersonalInfo(user) {
     if (user.attrs) {
         const fullName = `${user.attrs.firstName || ''} ${user.attrs.lastName || ''}`.trim();
         insertData('name', fullName || 'N/A');
@@ -88,5 +108,35 @@ function displayUserInfo(user) {
         insertData('nationality', user.attrs.nationality || 'N/A');
     } else {
         console.warn('User.attrs is null or undefined');
+        insertData('name', 'N/A');
+        insertData('email', 'N/A');
+        insertData('gender', 'N/A');
+        insertData('nationality', 'N/A');
+    }
+}
+
+// Section 3: Academic Progress
+function displayAcademicProgress(user) {
+    insertData('auditRatio', user.auditRatio ? user.auditRatio.toFixed(2) : 'N/A');
+    insertData('totalUp', user.totalUp || 0);
+    insertData('totalUpBonus', user.totalUpBonus || 0);
+    insertData('totalDown', user.totalDown || 0);
+  
+   
+}
+
+// Section 4: Projects & Activities
+function displayProjectsInfo(projectResult, wip) {
+    const completed = projectResult?.completed || [];
+    const wipCount = wip?.length || 0;
+    
+    insertData('completedCount', completed.length);
+    insertData('wipCount', wipCount);
+    
+    if (completed.length > 0) {
+        const latestProject = completed[0].path.split('/').pop();
+        insertData('latestProject', latestProject);
+    } else {
+        insertData('latestProject', 'None');
     }
 }

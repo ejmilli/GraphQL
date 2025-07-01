@@ -6,12 +6,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" sizes="favicon-96x96" href="/favicon.png">
-
   <title>Morty Portal</title>
 </head>
 <body class="rick-bg">
- 
- 
   <img src="images/mortry.jpeg" alt="Morty" class="corner-img bottom-right" />
 
   <header class="portal-header">
@@ -20,34 +17,67 @@
   </header>
 
   <main id="profileSection" class="portal-main">
-   
-
-    <div id="basicInfo" class="info-box">
-      <p>ID: <span id="id"></span></p>
-      <p>Login: <span id="login"></span></p>
-      <p>Campus: <span id="campus"></span></p>
-    </div>
-
-    <div id="personalInfo" class="info-box">
-      <p>Name: <span id="name"></span></p>
-      <p>Email: <span id="email"></span></p>
-      <p>Gender: <span id="gender"></span></p>
-      <p>Nationality: <span id="nationality"></span></p>
-    </div>
->
-
+    <!-- Section 1: Basic Information -->
     <section>
-      <h2 class="section-title">Skills Radar Chart</h2>
-      <div id="radarContainer">
+      <h2 class="section-title">🔮 Basic Information</h2>
+      <div id="basicInfo" class="info-box">
+        <p>ID: <span id="id"></span></p>
+        <p>Login: <span id="login"></span></p>
+        <p>Campus: <span id="campus"></span></p>
+        <p>Created: <span id="createdAt"></span></p>
+        <p>Last Updated: <span id="updatedAt"></span></p>
+      </div>
+    </section>
+
+    <!-- Section 2: Personal Information -->
+    <section>
+      <h2 class="section-title">👤 Personal Information</h2>
+      <div id="personalInfo" class="info-box">
+        <p>Name: <span id="name"></span></p>
+        <p>Email: <span id="email"></span></p>
+        <p>Gender: <span id="gender"></span></p>
+        <p>Nationality: <span id="nationality"></span></p>
+      </div>
+    </section>
+
+    <!-- Section 3: Academic Progress -->
+    <section>
+      <h2 class="section-title">📚 Academic Progress</h2>
+      <div id="academicInfo" class="info-box">
+        <p>Audit Ratio: <span id="auditRatio"></span></p>
+        <p>Total Audits Given: <span id="totalUp"></span></p>
+        <p>Bonus Audits: <span id="totalUpBonus"></span></p>
+        <p>Total Audits Received: <span id="totalDown"></span></p>
+       
+      </div>
+    </section>
+
+    <!-- Section 4: Projects & Activities -->
+    <section>
+      <h2 class="section-title">🚀 Projects & Activities</h2>
+      <div id="projectsInfo" class="info-box">
+        <p>Completed Projects: <span id="completedCount"></span></p>
+        <p>Work in Progress: <span id="wipCount"></span></p>
+        <p>Latest Project: <span id="latestProject"></span></p>
+      </div>
+    </section>
+
+    <!-- Section 5: Graphical Statistics -->
+    <section>
+      <h2 class="section-title">📊 Skills Radar Chart</h2>
+      <div id="radarContainer" class="chart-container">
         <svg id="radar-graph" width="500" height="400"></svg>
       </div>
     </section>
 
     <section>
-      <h2 class="section-title">Audit Ratio</h2>
-      <svg id="auditSvg" width="1000" height="400"></svg>
+      <h2 class="section-title">📈 Audit Ratio Visualization</h2>
+      <div class="chart-container">
+        <svg id="auditSvg" width="1000" height="120"></svg>
+      </div>
     </section>
 
+    
     <div id="error-msg" style="color: red; display: none;"></div>
   </main>
 

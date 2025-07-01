@@ -61,7 +61,17 @@ const QUERIES = {
 
       
 
-      
+      audits: transaction(
+          order_by: [{ createdAt: desc }]
+          where: { type: { _in: ["up", "down"] }, eventId: {_eq: ${eventId}}}
+      ) {
+          attrs
+          type
+          objectId
+          path
+          amount
+          createdAt
+      }
     }`,
 
     USER_SKILLS: `{
