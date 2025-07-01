@@ -19,23 +19,7 @@ body.login-page {
   overflow: hidden;
 }
 
-/* Portal Animation Background */
-body.login-page::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, transparent 20%, rgba(151, 206, 76, 0.1) 20.5%, rgba(151, 206, 76, 0.1) 80%, transparent 80.5%);
-  animation: portalSpin 20s linear infinite;
-  z-index: -1;
-}
 
-@keyframes portalSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 
 .login-page form {
   background: rgba(0, 0, 0, 0.85);
@@ -172,7 +156,7 @@ body.rick-bg::after {
 }
 
 /* Floating Portal Circles */
-.info-box, .section-title, .profile-pic-box {
+.info-box, .section-title{
   background: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   padding: 25px;
@@ -189,19 +173,6 @@ body.rick-bg::after {
   z-index: 1;
 }
 
-.info-box::before,
-.profile-pic-box::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #97CE4C, #00FFFF, #97CE4C);
-  border-radius: 22px;
-  z-index: -1;
-  animation: borderGlow 3s linear infinite;
-}
 
 @keyframes borderGlow {
   0%, 100% { opacity: 0.8; }
@@ -224,30 +195,6 @@ body.rick-bg::after {
   50% { transform: translateY(-15px); }
 }
 
-/* Profile Pic */
-.profile-pic-box {
-  margin-top: 40px;
-}
-
-.profile-pic {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  border: 4px solid #97CE4C;
-  box-shadow: 
-    0 0 25px rgba(151, 206, 76, 0.8),
-    inset 0 0 25px rgba(151, 206, 76, 0.2);
-  transition: all 0.4s ease;
-  filter: brightness(1.1) contrast(1.2);
-}
-
-.profile-pic:hover {
-  transform: rotate(-5deg) scale(1.1);
-  box-shadow: 
-    0 0 40px rgba(151, 206, 76, 1),
-    inset 0 0 40px rgba(151, 206, 76, 0.3);
-  filter: brightness(1.3) contrast(1.4) saturate(1.2);
-}
 
 /* Corner Floaters */
 .corner-img {
@@ -372,28 +319,3 @@ body.rick-bg::after {
   padding: 10px;
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #97CE4C, #00FFFF);
-  border-radius: 10px;
-  border: 2px solid rgba(0, 0, 0, 0.8);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #B8E661, #00FFFF);
-}
-
-/* Selection Styling */
-::selection {
-  background: rgba(151, 206, 76, 0.3);
-  color: #00FFFF;
-}

@@ -71,7 +71,7 @@ async function renderProfile() {
 
 function displayUserInfo(user) {
     // Basic info
-    insertData('campus', `[${user.campus || 'N/A'}:${user.labels?.[0]?.labelName || 'N/A'}]`);
+    insertData('campus', `[${user.campus }]`);
     insertData('id', `${user.id}`);
     insertData('login', `${user.login}`);
   
