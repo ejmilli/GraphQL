@@ -81,7 +81,7 @@ function displayUserInfo(user) {
     insertData('campus', `[${user.campus || 'N/A'}:${user.labels?.[0]?.labelName || 'N/A'}]`);
     insertData('id', `${user.id}`);
     insertData('login', `${user.login}`);
-
+  
     // User attributes
     if (user.attrs) {
         const fullName = `${user.attrs.firstName || ''} ${user.attrs.lastName || ''}`.trim();
