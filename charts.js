@@ -120,5 +120,3 @@ export function drawSkillsDistributionGraph(skillsData) {
     path.setAttribute('stroke-width', '2');
     svg.appendChild(path);
 }
-
-e
